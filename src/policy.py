@@ -2,11 +2,11 @@ import numpy as np
 import tensorflow as tf
 import sentencepiece as spm
 from tqdm import tqdm
-import utils
+import src.utils as utils
 import pickle
 import os
 import random
-from env import JerichoEnv
+from src.env import JerichoEnv
 
 # For Inference Step (CPU Mode)
 # os.environ['CUDA_VISIBLE_DEVICES'] = '-1'

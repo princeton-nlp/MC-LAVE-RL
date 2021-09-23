@@ -3,6 +3,8 @@ from src.qnetwork import DRRN
 from src.policy import Policy
 import src.utils as utils
 
+import wandb
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -25,7 +27,8 @@ def parse_args():
     parser.add_argument('--uct_type', default='MC-LAVE', type=str)
     parser.add_argument('--evaluate', default=False)
     parser.add_argument('--process_id', default=0, type=int)
-    parser.add_argument('--mode', default=0, type=int) # 0 : train DRRN, 1 : behavior clone, 2 : both
+    # 0 : train DRRN, 1 : behavior clone, 2 : both
+    parser.add_argument('--mode', default=0, type=int)
 
     return parser.parse_args()
 
@@ -34,15 +37,18 @@ def main():
     args = parse_args()
     args.rom_path = args.rom_path + utils.game_file(args.game_name)
 
+    wandb.init(project='text-games', name=f"mc-lave-learning-{args.game_name}")
+    wandb.config.update(args)
+
     print(args)
 
     if args.mode != 1:
         drrn = DRRN(args)
-        drrn.train(batch_size=args.batch_size, epochs=args.qnet_iter)        
-        
+        drrn.train(batch_size=args.batch_size, epochs=args.qnet_iter)
+
     elif args.mode != 0:
         policy = Policy(args)
-        policy.train(epochs=args.policy_epoch)           
+        policy.train(epochs=args.policy_epoch)
 
     else:
         print("Argument Error!!")

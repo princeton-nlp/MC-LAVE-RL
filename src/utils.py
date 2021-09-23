@@ -46,8 +46,10 @@ def find_near_acts(act_vec, acts, embedding, threshold=0.7):
         near_acts = []
     else:
         near_acts = itemgetter(*near_idx)(acts)
-        near_acts = [near_acts] if type(near_acts) is float else list(near_acts)
+        near_acts = [near_acts] if type(
+            near_acts) is float else list(near_acts)
     return near_acts, near_idx
+
 
 def find_near_actions(act_vec, acts, embedding, threshold=0.7):
     # act_vec: (N,) / acts: list of actions / embedding: (V, N)
@@ -62,7 +64,6 @@ def find_near_actions(act_vec, acts, embedding, threshold=0.7):
         near_acts = itemgetter(*near_idx)(acts)
         near_acts = [near_acts] if type(near_acts) is str else list(near_acts)
     return near_acts, near_idx
-
 
 
 def softmax(a, T=1):
@@ -145,22 +146,23 @@ def state_representation(obs, look, inv, prev_action, score, maxlen_obs, maxlen_
 
 
 def game_file(game_name):
-    rom_dict = {'zork1': 'zork1.z5', 
-                'zork3': 'zork3.z5', 
-                'spellbrkr' : 'spellbrkr.z3',
-                'advent': 'advent.z5',                 
-                'detective': 'detective.z5', 
+    rom_dict = {'zork1': 'zork1.z5',
+                'zork3': 'zork3.z5',
+                'spellbrkr': 'spellbrkr.z3',
+                'advent': 'advent.z5',
+                'detective': 'detective.z5',
                 'pentari': 'pentari.z5',
                 'enchanter': 'enchanter.z3',
-                'library' : 'library.z5',
-                'balances' : 'balances.z5',
-                'ztuu' : 'ztuu.z5',
-                'ludicorp' : 'ludicorp.z5',
-                'deephome' : 'deephome.z5',
-                'temple' : 'temple.z5',
-                'anchor' : 'anchor.z8',
-                'awaken' : 'awaken.z5',
-                'zenon' : 'zenon.z5'
+                'library': 'library.z5',
+                'balances': 'balances.z5',
+                'ztuu': 'ztuu.z5',
+                'ludicorp': 'ludicorp.z5',
+                'deephome': 'deephome.z5',
+                'temple': 'temple.z5',
+                'anchor': 'anchor.z8',
+                'awaken': 'awaken.z5',
+                'zenon': 'zenon.z5',
+                'inhumane': 'inhumane.z5'
                 }
-                
+
     return rom_dict[game_name]
